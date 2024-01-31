@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block breadcrumbs %}
+    {# Теги #}
+    {% with post.tags2.all as tags %} {# ORM-команда выбираем все теги связанные с записью и помещаем их в коллекцию tags, эта коллекция существует только в пределах with #}
+    {% if tags %} {# еслли коллекция не пустая то отображаем их через цикл на эктане в виде ссылок #}
+    <ul class="tags-list">
+    <li>Теги:</li>
+    {% for t in tags %}
+    <li><a href="{{ t.get_absolute_url }}">{{ t.tag }}</a></li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+{% endblock breadcrumbs %}
+{% block content %}
+    <h1>{{ post.title }}</h1> {# данные из словаря data во вьюхе #}
+
+{% if post.photo %} {# если у статьи есть фотография то выводим ее на страницу #}
+<p><img class="img-article-left" src="{{ post.photo.url }}" alt=""></p>
+{% endif %}
+
+{{ post.content|linebreaks }} {# linebreaks фильтр для переноса строк #} {# данные из словаря data во вьюхе #}
+{% endblock %}

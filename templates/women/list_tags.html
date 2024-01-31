@@ -1,0 +1,14 @@
+{# вывод на страницу тегов которые находятся модели в классе TagPost2 #}
+{#  в методе get_absolute_url который связан с основной таблицей через #}
+{# строчку tags2 = models.ManyToManyField('TagPost2', blank=True, related_name='tags') #}
+{% if tags %}
+    <p>Теги</p>
+    <ul class="tags-list">
+    {% for t in tags %}
+        <li><a href="{{ t.get_absolute_url}}">{{ t.tag }}</a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+
+

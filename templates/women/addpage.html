@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %} {# тег из джанго для защиты от межсайтовых атак #}
+{#    {{ form.as_p }} {# as_p метод для отображения всех полей, но потом перделали вручную ниже строка которая показывает еще ошибки#}
+    <div class="form-error">{{ form.non_field_errors }}</div> {# div для отображения ошибок которые не связаны ни с каким полем ввода #}
+
+    {% for f in form %}
+        <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>{{ f }}</p> {# вывод формы на страницу через цикл, так как форма это итерируемый объект, ниже старая закоменченная запись для вывода каждого параметра вручную #}
+        <div class="form-error">{{ f.errors }}</div> {# показывает ошибки #}
+    {% endfor %}
+        {# это ручной вывод каждого элемента, выше то же самое только через цикл, так как форма является итерированным элементом #}
+{#    <p><label class="form-label" for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>{{ form.title }}</p>#}
+{#    <div class="form-error">{{ form.title.errors }}</div> {# показывает ошибки #}
+{##}
+{#    <p><label class="form-label" for="{{ form.slug.id_for_label }}">{{ form.slug.label }}</label>{{ form.slug }}</p>#}
+{#    <div class="form-error">{{ form.slug.errors }}</div> {# показывает ошибки #}
+{##}
+{#    <p><label class="form-label" for="{{ form.content.id_for_label }}">{{ form.content.label }}</label>{{ form.content }}</p>#}
+{#    <div class="form-error">{{ form.content.errors }}</div> {# показывает ошибки #}
+{##}
+{#    <p><label class="form-label" for="{{ form.is_published.id_for_label }}">{{ form.is_published.label }}</label>{{ form.is_published }}</p>#}
+{#    <div class="form-error">{{ form.is_published.errors }}</div> {# показывает ошибки #}
+{##}
+{#    <p><label class="form-label" for="{{ form.cat.id_for_label }}">{{ form.cat.label }}</label>{{ form.cat }}</p>#}
+{#    <div class="form-error">{{ form.cat.errors }}</div> {# показывает ошибки #}
+{##}
+{#    <p><label class="form-label" for="{{ form.husband.id_for_label }}">{{ form.husband.label }}</label>{{ form.husband }}</p>#}
+{#    <div class="form-error">{{ form.husband.errors }}</div> {# показывает ошибки #}
+
+    <p><button type="submit">Отправить</button></p>
+    </form>
+{% endblock %}

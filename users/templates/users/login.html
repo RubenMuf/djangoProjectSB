@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Авторизация</h1>
+
+    <form method="post">
+    {% csrf_token %}
+     <div class="form-error">{{ form.non_field_errors }}</div> {# div для отображения ошибок которые не связаны ни с каким полем ввода #}
+
+    {% for f in form %}
+        <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>{{ f }}</p> {# вывод формы на страницу через цикл, так как форма это итерируемый объект, ниже старая закоменченная запись для вывода каждого параметра вручную #}
+        <div class="form-error">{{ f.errors }}</div> {# показывает ошибки #}
+    {% endfor %}
+    <p><button type="submit">Войти</button></p>
+
+    <p><a href="{% url 'users:password_reset' %}">Забыли пароль?</a></p>
+    </form>
+{% endblock %}

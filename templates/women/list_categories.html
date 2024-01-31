@@ -1,0 +1,7 @@
+{% for cat in cats %}
+{% if cat.id == cat_selected %} {# проверка если равно то подсветка #}
+<li class="selected">{{ cat.name }}</li>
+{% else %} {# иначе нет подсветки #}
+<li><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li> {# метод который формирует адрес, онр находится в моделе #}
+{% endif %}
+{% endfor %}
